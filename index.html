@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Issa Cissé, École polytechnique: machine learning applied to health in West Africa.">
+<title>Issa Cissé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : une colonne de lecture (≈ 68 car.), un en-tête-thèse, puis des études de cas ; les chiffres en police mono. */
+:root {
+  --bg: #f4f6f7;          /* papier légèrement froid */
+  --surface: #ffffff;
+  --ink: #16202b;
+  --muted: #566270;
+  --line: #d8dee3;
+  --accent: #b23a48;      /* rouge hémoglobine, utilisé avec retenue */
+  --accent-soft: #f6e3e5;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f151b; --surface: #161e26; --ink: #e6eaee; --muted: #9aa6b2; --line: #2a3540;
+  --accent: #e4707d; --accent-soft: #3a1f25; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f151b; --surface: #161e26; --ink: #e6eaee; --muted: #9aa6b2; --line: #2a3540;
+  --accent: #e4707d; --accent-soft: #3a1f25; color-scheme: dark; }
+
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.page { max-width: 760px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 64px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+html[data-lang="fr"] .en, html[data-lang="en"] .fr { display: none; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.mark { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.lang button { font: 600 13px var(--body); background: transparent; color: var(--muted); border: 0; padding: 6px 12px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+header.hero { padding-block: 56px 28px; border-bottom: 1px solid var(--line); }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 8vw, 4.2rem); line-height: 1; letter-spacing: -.02em; margin: 0 0 18px; }
+.thesis { font-family: var(--display); font-weight: 500; font-size: clamp(1.25rem, 3.4vw, 1.6rem); line-height: 1.3; margin: 0 0 18px; max-width: 34ch; text-wrap: balance; }
+.thesis em { font-style: normal; color: var(--accent); }
+.meta { color: var(--muted); margin: 0 0 20px; }
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.email { font-family: var(--mono); font-size: 15px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; user-select: all; }
+.btn { font: 600 14px var(--body); background: var(--ink); color: var(--bg); border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+.copied { font-size: 14px; color: var(--muted); }
+
+section { padding-block: 40px 8px; }
+h2 { font-family: var(--mono); font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 0 0 18px; }
+
+.case { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px 24px; margin-bottom: 22px; }
+.case h3 { font-family: var(--display); font-weight: 700; font-size: 1.45rem; line-height: 1.2; margin: 0 0 4px; text-wrap: balance; }
+.where { font-size: 14.5px; color: var(--muted); margin: 0 0 16px; }
+.case p { margin: 0 0 12px; max-width: 68ch; }
+.case h4 { font-family: var(--body); font-weight: 600; font-size: 15px; margin: 18px 0 6px; }
+.case ul { margin: 0 0 6px; padding-left: 20px; }
+.case li { margin: 4px 0; }
+
+.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 18px 0 6px; }
+.fig { border-top: 2px solid var(--accent); padding-top: 8px; min-width: 0; }
+.fig b { display: block; font-family: var(--mono); font-weight: 500; font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.fig span { font-size: 14px; color: var(--muted); }
+
+.scale { margin: 18px 0 8px; }
+.scale .bar { height: 16px; border-radius: 4px; background: linear-gradient(90deg, #ecd3cf 0%, #e3a9a6 35%, #cf6d74 70%, #ad2f3e 100%); max-width: 100%; }
+.scale .ticks { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.scale figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tag { font-family: var(--mono); font-size: 12.5px; background: var(--accent-soft); color: var(--ink); border-radius: 6px; padding: 3px 8px; }
+
+.note { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; margin: 14px 0 4px; color: var(--muted); font-size: 15.5px; }
+
+.rows { display: grid; gap: 16px; }
+.row { display: grid; grid-template-columns: 150px 1fr; gap: 16px; }
+.row .when { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.row b { font-weight: 600; }
+.row p { margin: 2px 0 0; color: var(--muted); font-size: 15.5px; }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; gap: 2px; } .case { padding: 22px 18px; } }
+
+.skills { display: grid; gap: 10px; }
+.skills div { min-width: 0; }
+.skills b { font-weight: 600; }
+footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: no-preference) { .btn { transition: opacity .15s; } .btn:hover { opacity: .85; } }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="top">
+    <span class="mark">ISSA CISSÉ · ML</span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="btn-en" data-l="en" aria-pressed="true">EN</button>
+      <button type="button" id="btn-fr" data-l="fr" aria-pressed="false">FR</button>
+    </div>
+  </div>
+
+  <header class="hero">
+    <h1>Issa Cissé</h1>
+    <p class="thesis">
+      <span class="en">I build machine learning that holds up <em>in a pharmacy in Abidjan</em>, not only in a notebook.</span>
+      <span class="fr">Je construis du machine learning qui tient la route <em>dans une pharmacie d'Abidjan</em>, pas seulement dans un notebook.</span>
+    </p>
+    <p class="meta">
+      <span class="en">Engineering student at École polytechnique (3rd year, applied mathematics). Looking for a machine learning / AI internship from 22 March 2027.</span>
+      <span class="fr">Élève ingénieur à l'École polytechnique (3ᵉ année, mathématiques appliquées). Je cherche un stage en machine learning / IA à partir du 22 mars 2027.</span>
+    </p>
+    <div class="contact">
+      <span class="email" id="email">issa.cisse@polytechnique.edu</span>
+      <button class="btn" type="button" id="copy"><span class="en">Copy email</span><span class="fr">Copier l'e-mail</span></button>
+      <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-work">
+    <h2 id="t-work"><span class="en">Selected work</span><span class="fr">Projets</span></h2>
+
+    <article class="case">
+      <h3><span class="en">Anaemia risk from a photo of the eye</span><span class="fr">Le risque d'anémie à partir d'une photo de l'œil</span></h3>
+      <p class="where">Meditect · <span class="en">Applied research intern</span><span class="fr">Stagiaire en recherche appliquée</span> · Abidjan · <span class="en">Jun – Aug 2026</span><span class="fr">juin – août 2026</span></p>
+      <p>
+        <span class="en">Anaemia is common and under-diagnosed in West Africa, and most published phone-based methods were built on light-skinned populations. I estimated anaemia risk from a smartphone photo of the inner eyelid (conjunctiva), for patients with dark skin.</span>
+        <span class="fr">L'anémie est fréquente et sous-diagnostiquée en Afrique de l'Ouest, et la plupart des méthodes par téléphone publiées ont été construites sur des peaux claires. J'ai estimé le risque d'anémie à partir d'une photo de la paupière inférieure (la conjonctive), chez des patients à peau foncée.</span>
+      </p>
+      <figure class="scale">
+        <div class="bar" role="img" aria-label="Colour scale from pale to red"></div>
+        <div class="ticks"><span>7</span><span>9</span><span>11</span><span>13</span><span>15 g/dL</span></div>
+        <figcaption>
+          <span class="en">Illustration: the paler the conjunctiva, the lower the haemoglobin. The model reads its redness (CIE a*), normalised on the surrounding skin to cancel lighting and camera effects.</span>
+          <span class="fr">Illustration : plus la conjonctive est pâle, plus l'hémoglobine est basse. Le modèle lit sa rougeur (canal CIE a*), normalisée sur la peau voisine pour annuler les effets de lumière et d'appareil.</span>
+        </figcaption>
+      </figure>
+      <div class="figures">
+        <div class="fig"><b>152</b><span class="en">patients collected</span><span class="fr">patients collectés</span></div>
+        <div class="fig"><b>6</b><span class="en">weeks in 2 pharmacies</span><span class="fr">semaines, 2 pharmacies</span></div>
+        <div class="fig"><b>≈ 0.73</b><span class="en">AUC, nested cross-validation</span><span class="fr">AUC, validation croisée imbriquée</span></div>
+      </div>
+      <h4><span class="en">What I did</span><span class="fr">Ce que j'ai fait</span></h4>
+      <ul>
+        <li><span class="en">Designed and ran the field data collection, and trained a nurse on the protocol.</span><span class="fr">Conçu et mené la collecte terrain, et formé une infirmière au protocole.</span></li>
+        <li><span class="en">Compared colour features and models; kept a simple, explainable feature (skin-anchored redness) over more complex ones that did not generalise.</span><span class="fr">Comparé des caractéristiques couleur et des modèles ; gardé une caractéristique simple et explicable (la rougeur ancrée sur la peau) plutôt que des plus complexes qui ne généralisaient pas.</span></li>
+        <li><span class="en">Audited the labels: found and fixed haemoglobin values matched to the wrong patient, by cross-checking timestamps.</span><span class="fr">Audité les étiquettes : trouvé et corrigé des valeurs d'hémoglobine attribuées au mauvais patient, en croisant les horodatages.</span></li>
+      </ul>
+      <p class="note">
+        <span class="en">Lesson: with small medical datasets, the honest number is the nested cross-validation one. I report 0.73, not the more flattering single-split scores.</span>
+        <span class="fr">Leçon : sur de petits jeux de données médicaux, le chiffre honnête est celui de la validation croisée imbriquée. J'annonce 0,73, pas les scores plus flatteurs d'un seul découpage.</span>
+      </p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">computer vision</span><span class="tag">classification</span><span class="tag">AUC</span><span class="tag">data quality</span></div>
+    </article>
+
+    <article class="case">
+      <h3><span class="en">Yako: an AI health assistant on the web and WhatsApp</span><span class="fr">Yako : un assistant de santé IA sur le web et WhatsApp</span></h3>
+      <p class="where">Meditect · <span class="en">AI developer, part-time</span><span class="fr">Développeur IA, temps partiel</span> · <span class="en">remote</span><span class="fr">à distance</span> · <span class="en">Sep 2026 – present</span><span class="fr">sept. 2026 – aujourd'hui</span></p>
+      <p>
+        <span class="en">Yako lets people in Côte d'Ivoire describe a health problem in their own words, by text or voice, and get oriented, with a real doctor taking over when needed. I lead the technical side: the AI agents, their safety rules, the doctor workspace and the WhatsApp channel.</span>
+        <span class="fr">Yako permet à des personnes en Côte d'Ivoire de décrire un problème de santé avec leurs mots, à l'écrit ou à la voix, et d'être orientées, avec un vrai médecin qui prend le relais si besoin. Je pilote la partie technique : les agents IA, leurs règles de sécurité, l'espace médecin et le canal WhatsApp.</span>
+      </p>
+      <h4><span class="en">What I built</span><span class="fr">Ce que j'ai construit</span></h4>
+      <ul>
+        <li><span class="en">Three LLM agents with tools (general consultation, mental health, women's health), sharing one server-side brain and one patient record across web and WhatsApp.</span><span class="fr">Trois agents LLM avec outils (consultation générale, santé mentale, santé des femmes), qui partagent un même cerveau côté serveur et un même dossier patient, sur le web comme sur WhatsApp.</span></li>
+        <li><span class="en">Safety outside the model: emergency and crisis signs are caught by fixed rules before the AI answers; questionnaire scores (PHQ-9, GAD-7) are computed by the server, never by the model; prescriptions are drafted by the AI but only sent after a doctor validates them.</span><span class="fr">La sécurité en dehors du modèle : les signes d'urgence et de crise sont repérés par des règles fixes avant que l'IA réponde ; les scores des questionnaires (PHQ-9, GAD-7) sont calculés par le serveur, jamais par le modèle ; l'ordonnance est proposée par l'IA mais envoyée seulement après validation par un médecin.</span></li>
+        <li><span class="en">Behaviour tests for the agents, and a security audit of the accounts (phone verification by WhatsApp code, PIN, family profiles): four vulnerabilities found and fixed.</span><span class="fr">Des tests de comportement des agents, et un audit de sécurité des comptes (vérification du numéro par code WhatsApp, code PIN, profils famille) : quatre failles trouvées et corrigées.</span></li>
+        <li><span class="en">Put three smartphone health scans (anaemia, pulse from video) into production on Google Cloud Run, and traced a result mismatch of a 1D CNN between two servers.</span><span class="fr">Mis en production trois analyses de santé par smartphone (anémie, pouls par vidéo) sur Google Cloud Run, et trouvé l'origine d'un écart de résultats d'un CNN 1D entre deux serveurs.</span></li>
+      </ul>
+      <div class="figures">
+        <div class="fig"><b>3</b><span class="en">AI agents with tools</span><span class="fr">agents IA avec outils</span></div>
+        <div class="fig"><b>2</b><span class="en">channels, one record</span><span class="fr">canaux, un seul dossier</span></div>
+        <div class="fig"><b>≈ 240</b><span class="en">automated tests</span><span class="fr">tests automatisés</span></div>
+      </div>
+      <p class="note">
+        <span class="en">How I work: I design, specify and review; I write the code with an AI coding assistant, then test and deploy it. I can explain every decision in it.</span>
+        <span class="fr">Ma façon de travailler : je conçois, je spécifie et je relis ; j'écris le code avec un assistant de programmation IA, puis je le teste et je le déploie. Je peux expliquer chacune de ses décisions.</span>
+      </p>
+      <div class="tags"><span class="tag">LLM agents</span><span class="tag">LLM APIs</span><span class="tag">evals</span><span class="tag">WhatsApp · Turn.io</span><span class="tag">Google Cloud Run</span></div>
+    </article>
+
+    <article class="case">
+      <h3><span class="en">Connected weather station</span><span class="fr">Station météo connectée</span></h3>
+      <p class="where"><span class="en">Group science project · Sep 2025 – Apr 2026</span><span class="fr">Projet scientifique collectif · sept. 2025 – avril 2026</span></p>
+      <p>
+        <span class="en">Automatic protection of an observatory dome: rain and temperature sensors on a Raspberry Pi, real-time monitoring, and a web interface to view the data and control the dome remotely.</span>
+        <span class="fr">Protection automatique d'une coupole d'observatoire : capteurs de pluie et de température sur Raspberry Pi, suivi en temps réel, et interface web pour voir les données et piloter la coupole à distance.</span>
+      </p>
+      <div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">sensors</span><span class="tag">web</span></div>
+    </article>
+  </section>
+
+  <section aria-labelledby="t-edu">
+    <h2 id="t-edu"><span class="en">Education</span><span class="fr">Formation</span></h2>
+    <div class="rows">
+      <div class="row">
+        <div class="when">2024 – <span class="en">now</span><span class="fr">auj.</span></div>
+        <div><b>École polytechnique</b>, <span class="en">engineering degree, 3rd year</span><span class="fr">cycle ingénieur, 3ᵉ année</span>
+          <p><span class="en">Probability for ML (Monte Carlo, generative models), Signal processing from Fourier to machine learning, Markov chains, Control and optimisation, Operations research.</span><span class="fr">Probabilités pour le ML (Monte-Carlo, modèles génératifs), Traitement du signal de Fourier au machine learning, Chaînes de Markov, Contrôle et optimisation, Recherche opérationnelle.</span></p></div>
+      </div>
+      <div class="row">
+        <div class="when">2022 – 2024</div>
+        <div><b>INP-HB</b>, Yamoussoukro
+          <p><span class="en">Preparatory classes in mathematics, physics and chemistry.</span><span class="fr">Classes préparatoires en mathématiques, physique et chimie.</span></p></div>
+      </div>
+      <div class="row">
+        <div class="when"><span class="en">High school</span><span class="fr">Lycée</span></div>
+        <div><b><span class="en">2nd prize, National Mathematics Competition</span><span class="fr">2ᵉ prix du Concours national de mathématiques</span></b>, Côte d'Ivoire</div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-skills">
+    <h2 id="t-skills"><span class="en">Skills</span><span class="fr">Compétences</span></h2>
+    <div class="skills">
+      <div><b>Machine learning</b> · <span class="en">classification, cross-validation, metrics (AUC), data collection and quality, LLM agents (tools, structured outputs, guardrails, evals)</span><span class="fr">classification, validation croisée, métriques (AUC), collecte et qualité des données, agents LLM (outils, sorties structurées, garde-fous, évaluations)</span></div>
+      <div><b><span class="en">Application security</span><span class="fr">Sécurité applicative</span></b> · <span class="en">authentication, access control, abuse limits, attack tests</span><span class="fr">authentification, contrôle d'accès, limitation des abus, tests d'attaque</span></div>
+      <div><b><span class="en">Programming and tools</span><span class="fr">Programmation et outils</span></b> · Python, Java, Google Cloud Run, Oracle Cloud, Turn.io</div>
+      <div><b><span class="en">Currently learning</span><span class="fr">En cours d'apprentissage</span></b> · NumPy, pandas, scikit-learn, OpenCV, PyTorch</div>
+      <div><b><span class="en">Languages</span><span class="fr">Langues</span></b> · <span class="en">French (native), English (B1), Spanish (A2)</span><span class="fr">français (langue maternelle), anglais (B1), espagnol (A2)</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="en">Also: science outreach with Association Science Ouverte (Drancy), maths and astronomy workshops for high-school students, 2024 – 2025. Basketball, reading, music.</span>
+    <span class="fr">Aussi : médiation scientifique avec l'Association Science Ouverte (Drancy), ateliers de mathématiques et d'astronomie pour lycéens, 2024 – 2025. Basketball, lecture, musique.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function setLang(l) {
+    root.setAttribute('data-lang', l);
+    root.setAttribute('lang', l);
+    document.getElementById('btn-en').setAttribute('aria-pressed', String(l === 'en'));
+    document.getElementById('btn-fr').setAttribute('aria-pressed', String(l === 'fr'));
+    try { localStorage.setItem('ic-lang', l); } catch (e) {}
+  }
+  var start = 'en';
+  try { start = localStorage.getItem('ic-lang') || (location.hash === '#fr' ? 'fr' : 'en'); } catch (e) { start = location.hash === '#fr' ? 'fr' : 'en'; }
+  setLang(start);
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.l); }); });
+
+  var copied = document.getElementById('copied');
+  document.getElementById('copy').addEventListener('click', function () {
+    var mail = document.getElementById('email').textContent;
+    var fr = root.getAttribute('data-lang') === 'fr';
+    var ok = function () { copied.textContent = fr ? 'Copié' : 'Copied'; };
+    var select = function () {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      copied.textContent = fr ? 'Sélectionné : Cmd+C pour copier' : 'Selected: press Cmd+C to copy';
+    };
+    try { navigator.clipboard.writeText(mail).then(ok, select); } catch (e) { select(); }
+  });
+})();
+</script>
+
+</body>
+</html>
