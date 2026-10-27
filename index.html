@@ -52,6 +52,9 @@ h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 8vw
 .email { font-family: var(--mono); font-size: 15px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; user-select: all; }
 .btn { font: 600 14px var(--body); background: var(--ink); color: var(--bg); border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
 .copied { font-size: 14px; color: var(--muted); }
+.cv { margin-top: 12px; }
+.cvlink { font: 600 14px var(--body); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; text-decoration: none; background: var(--surface); }
+.cvlink:hover { border-color: var(--accent); }
 
 section { padding-block: 40px 8px; }
 h2 { font-family: var(--mono); font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 0 0 18px; }
@@ -118,6 +121,10 @@ footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line);
       <span class="email" id="email">issa.cisse@polytechnique.edu</span>
       <button class="btn" type="button" id="copy"><span class="en">Copy email</span><span class="fr">Copier l'e-mail</span></button>
       <span class="copied" id="copied" aria-live="polite"></span>
+    </div>
+    <div class="contact cv">
+      <a class="cvlink" href="Issa_Cisse_CV_EN.pdf" target="_blank" rel="noopener"><span class="en">Résumé (English, PDF)</span><span class="fr">CV en anglais (PDF)</span></a>
+      <a class="cvlink" href="Issa_Cisse_CV_FR.pdf" target="_blank" rel="noopener"><span class="en">Résumé (French, PDF)</span><span class="fr">CV en français (PDF)</span></a>
     </div>
   </header>
 
